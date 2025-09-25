@@ -6,7 +6,7 @@ RUN sed -i 's@dl-cdn.alpinelinux.org@ftp.halifax.rwth-aachen.de@g' /etc/apk/repo
 RUN apk update
 RUN apk upgrade
 
-# required liboqs 
+# required wget2 
 RUN apk add --no-cache \
   gcc g++ make linux-headers musl-dev \
   zlib-dev zlib-static python3-dev \
