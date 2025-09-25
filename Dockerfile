@@ -19,7 +19,8 @@ RUN apk add --no-cache \
   gettext lzip flex texinfo wget \
   libgpg-error-static libgpg-error-dev \
   libassuan-static libassuan-dev openssl-dev openssl-libs-static \
-  libpsl-static libpsl-dev git libtool autoconf automake cmake ninja
+  libpsl-static libpsl-dev git libtool autoconf automake \
+  cmake ninja autoconf-archive
 
 ENV XZ_OPT=-e9
 COPY build-static-wget2.sh build-static-wget2.sh
