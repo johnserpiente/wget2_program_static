@@ -20,7 +20,7 @@ RUN apk add --no-cache \
   libgpg-error-static libgpg-error-dev \
   libassuan-static libassuan-dev openssl-dev openssl-libs-static \
   libpsl-static libpsl-dev git libtool autoconf automake \
-  cmake ninja autoconf-archive bash
+  pcre2-static pcre2-dev cmake ninja autoconf-archive bash
 
 ENV XZ_OPT=-e9
 COPY build-static-wget2.sh build-static-wget2.sh
