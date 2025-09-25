@@ -53,7 +53,7 @@ make install
 cd $WORKSPACE
 git clone https://gitlab.com/gnuwget/wget2.git
 cd wget2
-sed -i 's@git.savannah.gnu.org/git@github.com/coreutils@g' ./bootstrap
+git clone --recursive https://github.com/coreutils/gnulib.git
 ./bootstrap
 LDFLAGS="-static --static -no-pie -s -lidn2 -lunistring -lbrotlienc -lbrotlidec -lbrotlicommon -lgpgmepp -lgpgme -lgpg-error -lassuan"  ./configure --with-ssl=openssl --with-lzma --with-gpgme --prefix=/usr/local/wget2mm --with-bzip2 --enable-manylibs --disable-shared
 make
