@@ -51,7 +51,7 @@ make install
 
 # wget2
 cd $WORKSPACE
-git clone https://gitlab.com/gnuwget/wget2.git
+git clone https://github.com/rockdaboot/wget2
 cd wget2
 git clone --recursive https://github.com/coreutils/gnulib.git
 ./bootstrap
