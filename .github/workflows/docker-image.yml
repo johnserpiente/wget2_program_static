@@ -5,6 +5,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  # run it manually
+  workflow_dispatch:    
 
 jobs:
 
