@@ -9,25 +9,41 @@ on:
   workflow_dispatch:    
 
 jobs:
-
   build:
-
-    # Se establece directamente el sistema operativo, ya no se usa una matriz.
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build --tag builder .
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: build static program with alpine linux docker 
-      run: |
-        docker run --cidfile=builder.cid builder true
-        docker cp "$(cat builder.cid):work/artifact/." .
+      # 1. Configura QEMU (buena práctica para builds, esencial para multi-plataforma)
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
-    - name: Upload static program
-      uses: actions/upload-artifact@v4
-      with:
-        # Se cambia el nombre del artefacto a uno estático, ya que no hay matriz.
-        name: wget2-x86_64
-        path: ./*.tar.xz
+      # 2. Configura Docker Buildx (el motor de build moderno de Docker)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 3. Construye y extrae el artefacto en un solo paso
+      - name: Build image and extract artifact
+        uses: docker/build-push-action@v5
+        with:
+          # Etiqueta la imagen, útil para la caché
+          tags: builder:latest
+          # Define el directorio de salida donde se copiarán los archivos
+          # Esto reemplaza 'docker run' y 'docker cp'
+          outputs: type=local,dest=./output
+          # No sube la imagen a ningún registro
+          load: true 
+          # Configuración de la caché para acelerar builds futuras
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # 4. Sube el artefacto desde el directorio de salida
+      - name: Upload static program
+        uses: actions/upload-artifact@v4
+        with:
+          name: wget2-x86_64
+          # La ruta ahora apunta al directorio 'output' que creamos en el paso anterior
+          path: ./output/*.tar.xz
+          # (Opcional) Define por cuántos días guardar el artefacto
+          retention-days: 7
