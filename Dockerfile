@@ -1,4 +1,5 @@
-FROM alpine:latest
+# ========== STAGE 1: BUILD ==========
+FROM alpine:latest AS builder
 
 # https://mirrors.alpinelinux.org/
 RUN sed -i 's@dl-cdn.alpinelinux.org@ftp.halifax.rwth-aachen.de@g' /etc/apk/repositories
@@ -26,3 +27,9 @@ ENV XZ_OPT=-e9
 COPY build-static-wget2.sh build-static-wget2.sh
 RUN chmod +x ./build-static-wget2.sh
 RUN bash ./build-static-wget2.sh
+
+# ========== STAGE 2: EXPORT (solo el artefacto) ==========
+FROM scratch AS export
+
+# Copia SOLO el archivo .tar.xz desde el builder
+COPY --from=builder /work/artifact/*.tar.xz /
