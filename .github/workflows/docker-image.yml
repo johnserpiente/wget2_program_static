@@ -14,22 +14,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Configura Docker Buildx (el motor de build moderno de Docker)
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Construye y extrae el artefacto en un solo paso
+      # Construye y extrae SOLO el artefacto final
       - name: Build image and extract artifact
         uses: docker/build-push-action@v5
         with:
           tags: builder:latest
-          # Exporta los archivos directamente a un directorio local
+          # Apunta al stage "export" que solo tiene el .tar.xz
+          target: export
           outputs: type=local,dest=./output
-          # Configuración de caché para acelerar builds futuras
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      # Sube el artefacto desde el directorio de salida
       - name: Upload static program
         uses: actions/upload-artifact@v4
         with:
