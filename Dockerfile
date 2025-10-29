@@ -33,4 +33,4 @@ RUN bash ./build-static-wget2.sh
 FROM scratch AS export
 
 # Copia SOLO el archivo .tar.xz desde el builder
-COPY --from=builder /work/artifact/*.tar.xz /
+COPY --from=builder /work/artifact/*.tar.gz /
