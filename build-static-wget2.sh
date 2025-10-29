@@ -65,7 +65,8 @@ make install
 #mv ./wget2mm.tar.xz /work/artifact/
 
 cd /usr/local
-ls -l -R /usr/local/wget2mm
+ls -l -R /usr/local/wget2mm/bin
 upx --keep --best --lzma wget2mm/bin/wget2
-tar czf ./wget2.tar.gz wget2mm
+ls -l -R /usr/local/wget2mm/bin
+tar czf ./wget2.tar.gz wget2mm/bin/wget2
 mv ./wget2.tar.gz /work/artifact/
