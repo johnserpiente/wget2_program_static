@@ -32,5 +32,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: wget2-x86_64
-          path: ./output/*.tar.xz
+          path: ./output/*.tar.gz
           retention-days: 7
