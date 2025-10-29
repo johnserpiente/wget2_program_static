@@ -59,7 +59,12 @@ LDFLAGS="-static --static -no-pie -s -lidn2 -lunistring -lbrotlienc -lbrotlidec 
 make
 make install
 
-cd /usr/local
-tar vcJf ./wget2mm.tar.xz wget2mm
+#cd /usr/local
+#tar vcJf ./wget2mm.tar.xz wget2mm
 
-mv ./wget2mm.tar.xz /work/artifact/
+#mv ./wget2mm.tar.xz /work/artifact/
+
+cd /usr/local
+upx --keep --best --lzma wget2mm/bin/wget2
+tar czf ./wget2.tar.gz wget2mm/bin/wget2 wget2mm/bin/wget2.upx
+mv ./wget2.tar.gz /work/artifact/
