@@ -1,4 +1,4 @@
-name: Docker Image CI - X86_64 for Alpine Linux
+name: Docker Image CI - X86_64 for Alpine Linux - Wget2 static upx
 
 on:
   push:
