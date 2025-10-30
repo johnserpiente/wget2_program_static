@@ -35,13 +35,10 @@ jobs:
           #path: ./output/*.tar.gz
           #retention-days: 7
       - name: Create Release and Upload Asset
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v1
         with:
           files: ./output/*.tar.gz
-          # Esto crea una release con un nombre basado en la fecha y hora.
-          # Idealmente, querrías basarlo en un tag de git.
-          tag_name: "latest-build-${{ github.sha }}" 
+          tag_name: "latest-build-${{ github.sha }}"
           body: "Compilación automática de wget2 a partir del commit ${{ github.sha }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
