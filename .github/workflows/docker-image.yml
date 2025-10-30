@@ -2,9 +2,9 @@ name: Docker Image CI - X86_64 for Alpine Linux
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" , "wget2-static-upx"]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main" , "wget2-static-upx"]
   workflow_dispatch:    
 
 jobs:
