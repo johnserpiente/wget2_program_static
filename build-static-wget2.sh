@@ -24,8 +24,9 @@ make install
 
 echo "--- Compilando Nettle ---"
 cd $WORKSPACE
-curl -sL https://ftp.gnu.org/gnu/nettle/nettle-3.9.1.tar.gz | tar x --gzip
-cd nettle-3.9.1
+#curl -sL https://ftp.gnu.org/gnu/nettle/nettle-3.9.1.tar.gz | tar x --gzip
+curl -sL https://ftp.gnu.org/gnu/nettle/nettle-3.10.2.tar.gz | tar x --gzip
+cd nettle-3.10.2
 # Necesita GMP, que acabamos de instalar
 LDFLAGS="-static --static -no-pie -s" ./configure --prefix=/usr --disable-shared --enable-static --disable-documentation --disable-openssl --enable-gmp
 make -j$(nproc)
@@ -48,8 +49,8 @@ make install
 echo "--- Compilando GnuTLS ---"
 # Ahora que GMP, Nettle y libidn2 están listas, compilamos GnuTLS
 cd $WORKSPACE
-curl -sL https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.5.tar.xz | tar x --xz
-cd gnutls-3.8.5
+curl -sL https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.10.tar.xz | tar x --xz
+cd gnutls-3.8.10
 LDFLAGS="-static --static -no-pie -s" ./configure --prefix=/usr \
     --with-included-libtasn1 \
     --without-p11-kit \
