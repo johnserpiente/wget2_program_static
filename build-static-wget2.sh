@@ -50,7 +50,10 @@ echo "--- Compilando GnuTLS ---"
 cd $WORKSPACE
 curl -sL https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.10.tar.xz | tar x --xz
 cd gnutls-3.8.10
-LDFLAGS="-static --static -no-pie -s" ./configure --prefix=/usr \
+# Añadimos CFLAGS="-Wno-analyzer-infinite-loop" para silenciar la advertencia
+# que detiene la compilación con compiladores modernos.
+# También añadimos --disable-werror por si acaso.
+CFLAGS="-Wno-analyzer-infinite-loop" LDFLAGS="-static --static -no-pie -s" ./configure --prefix=/usr \
     --with-included-libtasn1 \
     --without-p11-kit \
     --without-tpm \
@@ -59,7 +62,8 @@ LDFLAGS="-static --static -no-pie -s" ./configure --prefix=/usr \
     --disable-shared \
     --enable-static \
     --with-crypto-backend=nettle \
-    --disable-tests
+    --disable-tests \
+    --disable-werror
 make -j$(nproc)
 make install
 
