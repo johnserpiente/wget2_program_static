@@ -49,8 +49,8 @@ make install
 echo "--- Compilando GnuTLS ---"
 # Ahora que GMP, Nettle y libidn2 están listas, compilamos GnuTLS
 cd $WORKSPACE
-curl -sL https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.9.tar.xz | tar x --xz
-cd gnutls-3.8.9
+curl -sL https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.8.tar.xz | tar x --xz
+cd gnutls-3.8.8
 LDFLAGS="-static --static -no-pie -s" ./configure --prefix=/usr \
     --with-included-libtasn1 \
     --without-p11-kit \
